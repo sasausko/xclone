@@ -3,68 +3,56 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.includes(:user).order(created_at: :desc)
   end
 
   # GET /posts/1 or /posts/1.json
   def show
   end
 
-  # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @post = current_user.posts.build(post_params)
+    
+    if @post.save
+      redirect_to @post, notice: 'Пост успішно створено.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: "Post was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Пост успішно оновлено.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
-
-  # DELETE /posts/1 or /posts/1.json
+  
   def destroy
-    @post.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to posts_path, notice: "Post was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+    @post.destroy
+    redirect_to posts_url, notice: 'Пост успішно видалено.'
+  end
+  
+  private
+  
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
+  
+  def authorize_user!
+    unless @post.user == current_user
+      redirect_to posts_path, alert: 'Ви не маєте прав для цієї дії.'
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params.expect(:id))
-    end
-
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.expect(post: [ :title, :body ])
-    end
 end
