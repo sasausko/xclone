@@ -1,0 +1,21 @@
+<header>
+  <nav>
+    <div class="nav-container">
+      <%= link_to 'Головна', root_path, class: 'nav-link logo'%>
+          
+      <% if user_signed_in? %>
+        <div class="user-menu">
+          <%= link_to 'Новий пост', new_post_path %>
+          <%= link_to 'Мій профіль', edit_user_registration_path %>
+          <%= link_to 'Вийти', destroy_user_session_path, 
+                data: { turbo_method: :delete } %>
+        </div>
+      <% else %>
+        <div class="auth-menu">
+          <%= link_to 'Увійти', new_user_session_path %>
+          <%= link_to 'Зареєструватися', new_user_registration_path %>
+        </div>
+      <% end %>
+    </div>
+  </nav>
+</header>

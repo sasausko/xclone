@@ -1,15 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Posts" %>
 
-<h1>Posts</h1>
+<h2>Пости</h2>
 
 <div id="posts">
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+      <h2>
+        <%= link_to post.title, post, style: "font-weight: bold;" %>
+      </h2>
+      <p><%= post.body %></p>
   <% end %>
 </div>
 
