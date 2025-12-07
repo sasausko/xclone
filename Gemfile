@@ -11,6 +11,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # gem "bcrypt", "~> 3.1.7"
+gem "devise", "~> 4.9.4"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
