@@ -22,12 +22,23 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <div class="container">
     <body>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+
       <%= render 'shared/header' %>
-      <%= yield %>
+      <% if notice %>
+        <div class="bg-success text-white p-2 text-center">
+          <%= notice %>
+        </div>
+      <% end %>
+  
+      <% if alert %>
+        <div class="bg-error text-white p-2 text-center">
+          <%= alert %>
+        </div>
+      <% end %>
+      <div class="container">
+        <%= yield %>
+      </div>
+      <%= render 'shared/footer' %>
     </body>
-  </div>
 </html>
