@@ -1,2 +1,87 @@
-<h1>Pages#contact</h1>
-<p>Find me in app/views/pages/contact.html.erb</p>
+<% content_for :title, "Контакти" %>
+
+<div class="px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-4">Контакти</h1>
+      <p class="text-lg text-gray-600">Зв'яжіться з нами</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Форма зворотного зв'язку -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <h2 class="text-xl font-bold text-gray-900 mb-6">Надіслати повідомлення</h2>
+        
+        <%= form_with(url: "#", local: true, class: "space-y-6") do |f| %>
+          <div>
+            <%= f.label :name, "Ваше ім'я", class: "block text-sm font-medium text-gray-700 mb-2" %>
+            <%= f.text_field :name, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" %>
+          </div>
+
+          <div>
+            <%= f.label :email, "Email", class: "block text-sm font-medium text-gray-700 mb-2" %>
+            <%= f.email_field :email, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" %>
+          </div>
+
+          <div>
+            <%= f.label :message, "Повідомлення", class: "block text-sm font-medium text-gray-700 mb-2" %>
+            <%= f.text_area :message, rows: 4, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" %>
+          </div>
+
+          <div>
+            <%= f.submit "Надіслати", class: "w-full px-4 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors cursor-pointer" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Контактна інформація -->
+      <div class="space-y-6">
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Контактна інформація</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-gray-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <div>
+                <p class="font-medium text-gray-700">Email</p>
+                <p class="text-gray-600">support@example.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <svg class="w-5 h-5 text-gray-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0-01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+              </svg>
+              <div>
+                <p class="font-medium text-gray-700">Час роботи підтримки</p>
+                <p class="text-gray-600">Пн-Пт: 9:00-18:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">Інше</h3>
+          <p class="text-gray-600 mb-4">Також ви можете:</p>
+          <ul class="space-y-2">
+            <li>
+              <%= link_to "Переглянути Правила", pages_terms_path, class: "text-blue-600 hover:text-blue-800" %>
+            </li>
+            <li>
+              <%= link_to "Ознайомитись з Політикою конфіденційності", pages_privacy_path, class: "text-blue-600 hover:text-blue-800" %>
+            </li>
+            <li>
+              <%= link_to "Дізнатись більше про нас", pages_about_path, class: "text-blue-600 hover:text-blue-800" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center">
+      <%= link_to "← Назад", :back, class: "inline-flex items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-4 py-2 rounded-lg transition-colors" %>
+    </div>
+  </div>
+</div>

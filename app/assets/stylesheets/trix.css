@@ -1,0 +1,13 @@
+/* FIX for Trix editor inside Tailwind */
+trix-editor {
+  @apply w-full min-h-[200px] border border-gray-300 rounded-lg p-3;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Optional: fix the toolbar width */
+trix-toolbar {
+  @apply w-full;
+}
+
