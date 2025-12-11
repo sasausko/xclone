@@ -27,6 +27,8 @@ gem "thruster", require: false
 
 gem "image_processing", "~> 1.2"
 
+gem "tailwindcss-rails", "~> 2.3"
+
 group :development, :test do
   gem "rspec-rails", "~> 8.0", ">= 8.0.2"
   gem "factory_bot_rails", "~> 6.5", ">= 6.5.1"

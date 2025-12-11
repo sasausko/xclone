@@ -1,18 +1,44 @@
-<header>
-  <nav class="nav">
-    <div class="nav-left">
-      <%= link_to 'Головна', root_path, class: 'nav-link logo'%>
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center justify-between">
+      <%= link_to 'Головна', root_path, class: 'text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200' %>
+      
+      <div class="flex items-center gap-4">
+        <% if user_signed_in? %>
+          <div class="flex items-center gap-4">
+            <%= link_to new_post_path, class: 'sm:hidden p-2 text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-lg transition-colors' do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+            <% end %>
+            
+            <%= link_to 'Новий пост', new_post_path, class: 'hidden sm:inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-sm hover:shadow' %>
+            
+            <%= link_to edit_user_registration_path, class: 'flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors p-2 hover:bg-gray-100 rounded-lg' do %>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+              <span class="hidden sm:inline">Профіль</span>
+            <% end %>
+          </div>
+          
+          <%= button_to destroy_user_session_path, 
+                method: :delete,
+                class: 'flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200',
+                form_class: 'm-0' do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+            <span class="hidden sm:inline">Вийти</span>
+          <% end %>
+          
+        <% else %>
+          <div class="flex items-center gap-4">
+            <%= link_to 'Увійти', new_user_session_path, class: 'text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium' %>
+            <%= link_to 'Зареєструватися', new_user_registration_path, class: 'px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-sm hover:shadow' %>
+          </div>
+        <% end %>
+      </div>
     </div>
-      <% if user_signed_in? %>
-        <div class="nav-right">
-          <%= link_to 'Новий пост', new_post_path %>
-          <%= link_to 'Мій профіль', edit_user_registration_path %>
-          <%= link_to 'Вийти', destroy_user_session_path, 
-                data: { turbo_method: :delete } %>
-      <% else %>
-          <%= link_to 'Увійти', new_user_session_path %>
-          <%= link_to 'Зареєструватися', new_user_registration_path %>
-      <% end %>
-        </div>
   </nav>
 </header>

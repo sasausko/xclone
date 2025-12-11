@@ -1,0 +1,45 @@
+<% content_for :title, "Зміна пароля" %>
+
+<div class="px-4 py-8">
+  <div class="max-w-md mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-gray-900 mb-2">Змінити пароль</h1>
+      <p class="text-gray-600">Введіть новий пароль</p>
+    </div>
+
+    <div class="bg-white rounded-lg border border-gray-200 p-6">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div>
+          <%= f.label :password, "Новий пароль", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password",
+                class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" %>
+          <% if @minimum_password_length %>
+            <p class="text-xs text-gray-500 mt-1">Мінімум <%= @minimum_password_length %> символів</p>
+          <% end %>
+        </div>
+
+        <div>
+          <%= f.label :password_confirmation, "Підтвердження пароля", class: "block text-sm font-medium text-gray-700 mb-2" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" %>
+        </div>
+
+        <div class="pt-4">
+          <%= f.submit "Змінити пароль", 
+                class: "w-full px-4 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors cursor-pointer" %>
+        </div>
+      <% end %>
+
+      <div class="mt-8 pt-8 border-t border-gray-200">
+        <div class="text-center space-y-3">
+          <%= render "devise/shared/links" %>
+          <%= link_to "Назад", :back, 
+                class: "block text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-4 py-2 rounded-lg transition-colors" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

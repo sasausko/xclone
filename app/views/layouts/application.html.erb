@@ -19,24 +19,14 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-    <body>
-
+    <body class="min-h-screen flex flex-col bg-gray-50">
       <%= render 'shared/header' %>
-      <% if notice %>
-        <div class="bg-success text-white p-2 text-center">
-          <%= notice %>
-        </div>
-      <% end %>
-  
-      <% if alert %>
-        <div class="bg-error text-white p-2 text-center">
-          <%= alert %>
-        </div>
-      <% end %>
-      <div class="container">
+      <%= render 'shared/flash_massages' %>
+      <main class="container flex-1 mx-auto px-4 py-8">
         <%= yield %>
       </div>
       <%= render 'shared/footer' %>

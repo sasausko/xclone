@@ -1,14 +1,37 @@
-<% content_for :title, "Posts" %>
+<% content_for :title, "Всі пости" %>
 
-<h2>Пости</h2>
+<div class="px-4 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-2xl font-bold text-gray-900">Всі пости</h1>
+    <%= link_to "Новий пост", new_post_path, 
+          class: "px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-600 transition-colors" %>
+  </div>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-      <h2>
-        <%= link_to post.title, post, style: "font-weight: bold;" %>
-      </h2>
-      <p><%= post.body %></p>
+  <div id="posts" class="space-y-4">
+    <% @posts.each do |post| %>
+      <div class="bg-white p-5 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
+        <div class="flex items-start justify-between">
+          <div class="flex-1">
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">
+              <%= link_to post.title, post, class: "hover:text-blue-600 transition-colors" %>
+            </h2>
+            <p class="text-gray-600 mb-3 line-clamp-2">
+              <%= truncate(post.body.to_plain_text, length: 300, separator: ' ', omission: '...') %>
+            </p>
+            <div class="flex items-center text-sm text-gray-500">
+              <span><%= time_ago_in_words(post.created_at) %> тому</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @posts.empty? %>
+    <div class="text-center py-12">
+      <p class="text-gray-500 mb-4">Постів ще немає</p>
+      <%= link_to "Створити перший пост", new_post_path, 
+            class: "text-blue-500 hover:text-blue-700 font-medium" %>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New post", new_post_path %>

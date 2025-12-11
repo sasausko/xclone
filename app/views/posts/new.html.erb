@@ -1,11 +1,15 @@
-<% content_for :title, "New post" %>
+<% content_for :title, "Новий пост" %>
 
-<h1>New post</h1>
+<div class="mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Новий пост</h1>
+    </div>
+    <%= link_to "Назад", posts_path, 
+          class: "text-gray-600 hover:text-gray-800 text-sm font-medium" %>
+  </div>
 
-<%= render "form", post: @post %>
-
-<br>
-
-<div>
-  <%= link_to "Back to posts", posts_path %>
+  <div class="bg-white rounded-lg p-6 border">
+    <%= render "form", post: @post %>
+  </div>
 </div>

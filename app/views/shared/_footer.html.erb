@@ -1,14 +1,16 @@
-<footer class="container">
-  <div class="row">
-    <div class="col-12 text-center">
-      <p class="text-small text-muted">
-        &copy; <%= Time.current.year %> 
-        <%= link_to "Сайт", pages_home_path, class: "text-muted" %> | 
-        <%= link_to "Правила", pages_terms_path, class: "text-muted" %> | 
-        <%= link_to "Політика конфеденційності", pages_privacy_path, class: "text-muted" %> | 
-        <%= link_to "Про нас", pages_about_path, class: "text-muted" %> | 
-        <%= link_to "Контакти", pages_contact_path, class: "text-muted" %>
-      </p>
+<footer class="border-t bg-gray-50 py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0 text-gray-600">
+        &copy; <%= Time.current.year %> Ваш проект
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+        <%= link_to "Сайт", pages_home_path, class: "hover:text-gray-800 transition-colors" %>
+        <%= link_to "Правила", pages_terms_path, class: "hover:text-gray-800 transition-colors" %>
+        <%= link_to "Конфеденційність", pages_privacy_path, class: "hover:text-gray-800 transition-colors" %>
+        <%= link_to "Про нас", pages_about_path, class: "hover:text-gray-800 transition-colors" %>
+        <%= link_to "Контакти", pages_contact_path, class: "hover:text-gray-800 transition-colors" %>
+      </div>
     </div>
   </div>
 </footer>

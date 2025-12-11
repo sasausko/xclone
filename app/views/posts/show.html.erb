@@ -1,8 +1,43 @@
-<%= render @post %>
+<% content_for :title, @post.title %>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
+<div class="mx-auto px-4 py-8">
+  <div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-3xl font-bold text-gray-900"><%= @post.title %></h1>
+      <div class="flex items-center space-x-3">
+        <% if current_user == @post.user %>
+          <%= link_to "Редагувати", edit_post_path(@post), 
+                class: "text-sm text-blue-600 hover:text-blue-800 font-medium" %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="flex items-center text-gray-500 text-sm">
+      <span class="mr-4"><%= time_ago_in_words(@post.created_at) %> тому</span>
+      <% if @post.user %>
+        <span>Автор: <%= @post.user.email %></span>
+      <% end %>
+    </div>
+  </div>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm mb-8">
+    <div class="prose prose-lg max-w-none">
+      <%= @post.body %>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between pt-6 border-t">
+    <%= link_to "← Назад до постів", posts_path, 
+          class: "inline-flex items-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-4 py-2 rounded-lg transition-colors" %>
+    
+    <% if current_user == @post.user %>
+      <div class="flex items-center space-x-3">
+        <%= link_to "Редагувати", edit_post_path(@post), 
+              class: "px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors font-medium" %>
+        <%= button_to "Видалити", @post, method: :delete, 
+              data: { turbo_confirm: "Ви впевнені, що хочете видалити цей пост?" },
+              class: "px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors font-medium" %>
+      </div>
+    <% end %>
+  </div>
 </div>

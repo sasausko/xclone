@@ -1,2 +1,31 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% content_for :title, "Головна" %>
+
+<div class="mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold text-gray-900 mb-2">Останні публікації</h1>
+
+  <% if @posts.any? %>
+    <div class="space-y-6 mb-10">
+      <% @posts.each do |post| %>
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">
+            <%= link_to post.title, post, class: "hover:text-blue-600" %>
+          </h2>
+          <p class="text-gray-600 mb-3">
+            <%= truncate(post.body.to_plain_text, length: 300, separator: ' ', omission: '...') %>
+          </p>
+          <div class="flex items-center justify-between">
+            <%= link_to "Переглянути", post, class: "text-blue-500 hover:text-blue-700 text-sm font-medium" %>
+            <span class="text-sm text-gray-400"><%= time_ago_in_words(post.created_at) %> тому</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="flex justify-center space-x-4">
+    <%= link_to "Всі пости", posts_path, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+    <% if user_signed_in? %>
+      <%= link_to "Новий пост", new_post_path, class: "px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200" %>
+    <% end %>
+  </div>
+</div>
