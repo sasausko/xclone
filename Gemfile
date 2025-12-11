@@ -28,12 +28,13 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem "rspec-rails", "~> 8.0", ">= 8.0.2"
+  gem "factory_bot_rails", "~> 6.5", ">= 6.5.1"
+  gem "faker", "~> 3.5", ">= 3.5.3"
+  gem "shoulda-matchers", "~> 7.0", ">= 7.0.1"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-
   gem "bundler-audit", require: false
-
   gem "brakeman", require: false
-
   gem "rubocop-rails-omakase", require: false
 end
 
@@ -42,6 +43,7 @@ group :development do
 end
 
 group :test do
+  gem "database_cleaner-active_record", "~> 2.2", ">= 2.2.2"
   gem "capybara"
   gem "selenium-webdriver"
 end
