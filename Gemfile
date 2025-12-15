@@ -27,7 +27,7 @@ gem "thruster", require: false
 
 gem "image_processing", "~> 1.2"
 
-gem "tailwindcss-rails", "~> 2.3"
+gem "tailwindcss-rails", "~> 4.4"
 
 group :development, :test do
   gem "rspec-rails", "~> 8.0", ">= 8.0.2"
